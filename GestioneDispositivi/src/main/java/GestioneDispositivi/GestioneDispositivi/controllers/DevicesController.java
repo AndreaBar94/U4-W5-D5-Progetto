@@ -88,24 +88,35 @@ public class DevicesController {
 		
 		@PutMapping("/smartphone/{deviceId}")
 		public Smartphone findByIdAndUpdateSmartphone(@PathVariable UUID deviceId, @RequestBody Smartphone body) throws Exception {
-		    return (Smartphone) devicesService.findByIdAndUpdate(deviceId, body);
+		    Smartphone found = (Smartphone) devicesService.findById(deviceId);
+		    found.setState(body.getState());
+		    found.setUser(body.getUser());
+		    return (Smartphone) devicesService.findByIdAndUpdate(deviceId, found);
 		}
+
 
 		@PutMapping("/tablet/{deviceId}")
 		public Tablet findByIdAndUpdateTablet(@PathVariable UUID deviceId, @RequestBody Tablet body) throws Exception {
-		    return (Tablet) devicesService.findByIdAndUpdate(deviceId, body);
+		    Tablet found = (Tablet) devicesService.findById(deviceId);
+		    found.setState(body.getState());
+		    found.setUser(body.getUser());
+		    return (Tablet) devicesService.findByIdAndUpdate(deviceId, found);
 		}
 
 		@PutMapping("/laptop/{deviceId}")
 		public Laptop findByIdAndUpdateLaptop(@PathVariable UUID deviceId, @RequestBody Laptop body) throws Exception {
-		    return (Laptop) devicesService.findByIdAndUpdate(deviceId, body);
+		    Laptop found = (Laptop) devicesService.findById(deviceId);
+		    found.setState(body.getState());
+		    found.setUser(body.getUser());
+		    return (Laptop) devicesService.findByIdAndUpdate(deviceId, found);
 		}
+
 
 		
 		//---------------------------DELETE---------------------------------------//
 		@DeleteMapping("/{deviceId}")
 		@ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
-		public void findByIdAndDelete(@PathVariable UUID userId) throws Exception {
-			devicesService.findByIdAndDelete(userId);
+		public void findByIdAndDelete(@PathVariable UUID deviceId) throws Exception {
+			devicesService.findByIdAndDelete(deviceId);
 		}
 }
