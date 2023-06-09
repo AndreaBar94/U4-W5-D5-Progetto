@@ -52,7 +52,7 @@ public class UsersController {
 	}
 	
 	//---------------------------PUT------------------------------------------//
-	@PutMapping("/{userId}")
+	@PutMapping("/{username}")
 	public User findByUsernameAndUpdate(@PathVariable String username, @RequestBody User body) throws Exception {
 		return usersService.findByUsernameAndUpdate(username, body);
 	}

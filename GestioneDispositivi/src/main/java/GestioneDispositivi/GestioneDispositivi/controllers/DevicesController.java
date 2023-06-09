@@ -41,6 +41,7 @@ public class DevicesController {
 			return devicesService.find(page, size, sortedBy);
 		}
 		
+		
 		//---------------------------GET-------------------------------------------//
 		@GetMapping("/{deviceId}")
 		public Device findById(@PathVariable UUID deviceId) throws Exception {

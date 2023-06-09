@@ -51,7 +51,6 @@ public class UsersService {
 	public User findByUsernameAndUpdate(String username, User u) throws Exception {
 		User found = this.findByUsername(username);
 		
-		found.setUsername(u.getUsername());
 		found.setName(u.getName());
 		found.setSurname(u.getSurname());
 		found.setEmail(u.getEmail());
