@@ -6,6 +6,7 @@ import GestioneDispositivi.GestioneDispositivi.enums.State;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -25,7 +26,8 @@ public abstract class Device {
 	@Enumerated(EnumType.STRING)
 	private State state;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_username")
 	private User user;
 	
 }

@@ -28,6 +28,7 @@ public class JWTAuthFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+
 		//questo metodo verrà lanciato ad ogni request
 		//si inizia estraendo il token dall'header della richiesta
 		String authHeader = request.getHeader("Authorization");
@@ -40,16 +41,16 @@ public class JWTAuthFilter extends OncePerRequestFilter{
 		
 		JWTTools.isTokenValid(accessToken);
 		//se va tutto bene lavoro sul token
-		String username = JWTTools.extractSubject(accessToken);
+		String email = JWTTools.extractSubject(accessToken);
 		
 		try {
-			User user = usersService.findByUsername(username);
+			
+			User user = usersService.findByEmail(email);
 			
 			//una volta trovato l'utente lo aggiungo al SecurityContextHolder
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authToken);
-			
 			
 			// accedo al prossimo blocco della filterChain
 			filterChain.doFilter(request, response);

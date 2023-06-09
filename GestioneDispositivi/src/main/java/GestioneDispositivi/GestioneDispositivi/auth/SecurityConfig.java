@@ -26,7 +26,8 @@ public class SecurityConfig {
 		
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
-
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users").authenticated());
+		
 		
 
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

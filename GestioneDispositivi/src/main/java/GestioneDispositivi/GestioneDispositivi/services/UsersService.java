@@ -30,12 +30,12 @@ public class UsersService {
 		return usersRepo.save(newUser);
 	}
 	
-	public Page<User> find(int page, int size, String sortedBy){
+	public Page<User> find(int page, int size, String sortBy){
 		if (size < 0)
 			size = 10;
 		if (size > 100)
 			size = 100;
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sortedBy));
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 		
 		return usersRepo.findAll(pageable);
 	}

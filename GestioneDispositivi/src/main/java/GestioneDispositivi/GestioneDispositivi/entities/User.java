@@ -2,9 +2,14 @@ package GestioneDispositivi.GestioneDispositivi.entities;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.Id;
@@ -19,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String username;
 	private String name;
@@ -27,8 +33,9 @@ public class User implements UserDetails{
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Device> devices;
-
+	
 	
 	public User(String username, String name, String surname, String email, String password) {
 		super();

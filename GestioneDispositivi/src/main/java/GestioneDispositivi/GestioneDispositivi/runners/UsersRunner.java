@@ -33,7 +33,7 @@ public class UsersRunner implements CommandLineRunner {
 			user.setSurname(surname);
 			user.setEmail(email);
 			user.setPassword(password);
-			usersService.create(user);
+			//usersService.create(user);
 		}
 
 	}

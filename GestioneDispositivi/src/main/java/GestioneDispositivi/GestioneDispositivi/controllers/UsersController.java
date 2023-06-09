@@ -34,8 +34,8 @@ public class UsersController {
 	@GetMapping("")
 	public Page<User> getUsers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size,
-			@RequestParam(defaultValue = "id") String sortedBy){
-		return usersService.find(page, size, sortedBy);
+			@RequestParam(defaultValue = "id") String sortBy){
+		return usersService.find(page, size, sortBy);
 	}
 	
 	//---------------------------GET-------------------------------------------//
