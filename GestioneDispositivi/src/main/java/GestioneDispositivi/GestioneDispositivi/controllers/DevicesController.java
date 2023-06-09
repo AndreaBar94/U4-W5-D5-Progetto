@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import GestioneDispositivi.GestioneDispositivi.entities.Device;
+import GestioneDispositivi.GestioneDispositivi.entities.Laptop;
+import GestioneDispositivi.GestioneDispositivi.entities.Smartphone;
+import GestioneDispositivi.GestioneDispositivi.entities.Tablet;
+import GestioneDispositivi.GestioneDispositivi.entities.User;
 import GestioneDispositivi.GestioneDispositivi.services.DevicesService;
+import GestioneDispositivi.GestioneDispositivi.services.UsersService;
 
 @RestController
 @RequestMapping("/devices")
@@ -25,6 +30,8 @@ public class DevicesController {
 	
 	@Autowired
 	DevicesService devicesService;
+	@Autowired
+	UsersService usersService;
 	
 		//---------------------------GET_ALL---------------------------------------//
 		@GetMapping("")
@@ -35,7 +42,7 @@ public class DevicesController {
 		}
 		
 		//---------------------------GET-------------------------------------------//
-		@GetMapping("/{userId}")
+		@GetMapping("/{deviceId}")
 		public Device findById(@PathVariable UUID deviceId) throws Exception {
 			return devicesService.findById(deviceId);
 		}
@@ -47,14 +54,56 @@ public class DevicesController {
 			return devicesService.create(body);
 		}
 		
+		@PostMapping("/smartphone")
+		@ResponseStatus(HttpStatus.CREATED)
+		public Smartphone saveSmartphone(@RequestBody @Validated Smartphone body, @RequestParam String username) throws Exception {
+		    User user = usersService.findByUsername(username);
+		    body.setUser(user);
+		    return (Smartphone) devicesService.create(body);
+		}
+
+		
+		@PostMapping("/tablet")
+		@ResponseStatus(HttpStatus.CREATED)
+		public Tablet saveTablet(@RequestBody @Validated Tablet body, @RequestParam String username) throws Exception {
+		    User user = usersService.findByUsername(username);
+		    body.setUser(user);
+		    return (Tablet) devicesService.create(body);
+		}
+
+		@PostMapping("/laptop")
+		@ResponseStatus(HttpStatus.CREATED)
+		public Laptop saveLaptop(@RequestBody @Validated Laptop body, @RequestParam String username) throws Exception {
+		    User user = usersService.findByUsername(username);
+		    body.setUser(user);
+		    return (Laptop) devicesService.create(body);
+		}
+
+		
 		//---------------------------PUT------------------------------------------//
-		@PutMapping("/{userId}")
+		@PutMapping("/{deviceId}")
 		public Device findByIdAndUpdate(@PathVariable UUID deviceId, @RequestBody Device body) throws Exception {
 			return devicesService.findByIdAndUpdate(deviceId, body);
 		}
 		
+		@PutMapping("/smartphone/{deviceId}")
+		public Smartphone findByIdAndUpdateSmartphone(@PathVariable UUID deviceId, @RequestBody Smartphone body) throws Exception {
+		    return (Smartphone) devicesService.findByIdAndUpdate(deviceId, body);
+		}
+
+		@PutMapping("/tablet/{deviceId}")
+		public Tablet findByIdAndUpdateTablet(@PathVariable UUID deviceId, @RequestBody Tablet body) throws Exception {
+		    return (Tablet) devicesService.findByIdAndUpdate(deviceId, body);
+		}
+
+		@PutMapping("/laptop/{deviceId}")
+		public Laptop findByIdAndUpdateLaptop(@PathVariable UUID deviceId, @RequestBody Laptop body) throws Exception {
+		    return (Laptop) devicesService.findByIdAndUpdate(deviceId, body);
+		}
+
+		
 		//---------------------------DELETE---------------------------------------//
-		@DeleteMapping("/{userId}")
+		@DeleteMapping("/{deviceId}")
 		@ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
 		public void findByIdAndDelete(@PathVariable UUID userId) throws Exception {
 			devicesService.findByIdAndDelete(userId);
