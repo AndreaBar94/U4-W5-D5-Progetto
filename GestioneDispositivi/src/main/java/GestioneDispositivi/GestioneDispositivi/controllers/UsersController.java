@@ -58,7 +58,7 @@ public class UsersController {
 	}
 	
 	//---------------------------DELETE---------------------------------------//
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/{username}")
 	@ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
 	public void findByUsernameAndDelete(@PathVariable String username) throws Exception {
 		usersService.findByUsernameAndDelete(username);

@@ -30,12 +30,12 @@ public class DevicesRunner implements CommandLineRunner {
             Laptop laptop = new Laptop();
             laptop.setState(State.ASSIGNED);
             laptop.setUser(user);
-            //devicesService.create(laptop);
+            devicesService.create(laptop);
 
             Smartphone smartphone = new Smartphone();
             smartphone.setState(State.ASSIGNED);
             smartphone.setUser(user);
-            //devicesService.create(smartphone);
+            devicesService.create(smartphone);
         }
     }
 }
