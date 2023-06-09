@@ -1,0 +1,3 @@
+INDEX VERSION 1.132+/Users/andreabarocchi/Desktop/Backend Epicode/U4-W5-D5-Progetto/GestioneDispositivi/.metadata/.plugins/org.eclipse.jdt.core
+3981961839.index
+468616680.index
